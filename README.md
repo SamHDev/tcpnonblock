@@ -96,6 +96,8 @@ Just declare the `threading` argument in the creation of the object.
 It works for both `TCPSocketServer` and `TCPSocketClient`
 
 ```py
-server = remote.TCPSocketServer(threaded=True)
-client = remote.TCPSocketClient(threaded=True)
+server = tcpnonblock.TCPSocketServer(threaded=True)
+client = rtcpnonblock.TCPSocketClient(threaded=True)
 ```
+
+The Thread will be created and started on `.start()`
