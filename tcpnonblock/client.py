@@ -1,3 +1,8 @@
+import socket
+import threading
+import time
+from . import utils
+
 class TCPSocketClient:
     def __init__(self, threaded=False, charset="UTF-8"):
         self.host = None
