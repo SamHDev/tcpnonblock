@@ -1,7 +1,7 @@
 import socket
 import threading
 import time
-from . import utils
+from .utils import *
 
 class TCPSocketServerInstance:
     def __init__(self, cr, addr, server):
