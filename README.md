@@ -21,7 +21,7 @@ python3 -m pip install git+https://github.com/SamHDev/tcpnonblock.git
 ```
 *Note for Noobies: If `python3` work then use `python`*
 
-----
+
 ## Usage
 
 You can import the libary with the following statement:
@@ -29,6 +29,7 @@ You can import the libary with the following statement:
 import tcpnonblock
 ```
 
+### Server Example
 Here is a quick Example of a TCPSocket Server. This is an [Echo Server](/demos/echo/server.py) that replies the message from a client.
 ```py
 server = tcpnonblock.TCPSocketServer() # Create a Server Object
@@ -46,8 +47,8 @@ class ClientInstance(tcpnonblock.TCPSocketServerInstance):
     
     # On Client Message
     def message(self, msg):
-        self.send("Client Message: ",msg)
-        self.reply(msg) # Echo the Message
+        print("Client Message: ",msg)
+        self.send("You Said: ", msg) # Echo the Message (Send)
 
 # On Server Start Event
 @server.on_start
@@ -62,4 +63,39 @@ def stop():
 # Start the Server
 server.listen("0.0.0.0", 8080) # Host,Port
 server.start()
+```
+
+### Client Example
+Here is a quick Example of a TCPSocket Client to go with our Echo Server. This is an [Echo Client](/demos/echo/client.py) that interacts with our Example.
+```py
+client = remote.TCPSocketClient() # Create a Client Object
+
+# On Client Connected to Server
+@client.on_open
+def on_open():
+    print("Connected to Server")
+    client.send("Hello World!")
+
+# On Client Disconnected from Server
+@client.on_close
+def on_close():
+    print("Disconnected to Server")
+
+# On Server Message Received
+@client.on_message
+def on_message(msg):
+    print("Reply: ", msg) #`Msg` is a `string`
+
+client.connect("localhost", 81)
+```
+
+#### Threading
+
+What about that threading I mentioned earlier, well its this simple. 
+Just declare the `threading` argument in the creation of the object.
+It works for both `TCPSocketServer` and `TCPSocketClient`
+
+```py
+server = remote.TCPSocketServer(threaded=True)
+client = remote.TCPSocketClient(threaded=True)
 ```
