@@ -1,7 +1,7 @@
 import socket
 import threading
 import time
-from . import utils
+from .utils import *
 
 class TCPSocketClient:
     def __init__(self, threaded=False, charset="UTF-8"):
