@@ -89,7 +89,7 @@ def on_message(msg):
 client.connect("localhost", 81)
 ```
 
-#### Threading
+### Threading
 
 What about that threading I mentioned earlier, well its this simple. 
 Just declare the `threading` argument in the creation of the object.
@@ -101,3 +101,7 @@ client = rtcpnonblock.TCPSocketClient(threaded=True)
 ```
 
 The Thread will be created and started on `.start()`
+
+## License and Attributes
+
+Created by Sam Huddart under alias [SamHDev](https://github.com/SamHDev/) for the [Blume Open Source Project](https://www.youtube.com/watch?v=oHg5SJYRHA0). `SamHDev/tcpnonblock` is licensed under the GNU General Public License v3.0 and is Open-Source. Commercial use, Modification and Distribution are permmited. Although credit is not necessary, it is much obliged. If you do wish to credit the author, please link the [respiratory](https://github.com/SamHDev/tcpnonblock/) and the author at [github](https://github.com/SamHDev/) or [website](https://samhdev.com). 
