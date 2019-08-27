@@ -86,7 +86,7 @@ def on_close():
 def on_message(msg):
     print("Reply: ", msg) #`Msg` is a `string`
 
-client.connect("localhost", 81)
+client.connect("localhost", 8080)
 ```
 
 ### Threading
