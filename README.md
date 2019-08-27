@@ -5,8 +5,8 @@ A Simple Implementation of Non-Blocking TCP Socket Server.
 
  * Simple to Use
  * Threading Built In
- * Expandable
- * Stress Tested
+ * Expandable  - Does'nt use a thread per connection
+ * Stress Tested - Can handle up to 100 connections well (tested on a [OVH VPS SSD 1](https://www.ovh.co.uk/vps/vps-ssd.xml))
 
 ## Installation
 You can install via python's `pip` module:
