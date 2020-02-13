@@ -1,5 +1,5 @@
 # https://github.com/SamHDev/tcpnonblock/
 
-from .session import *
+from .instance import *
 from .client import *
 from .server import *
