@@ -15,6 +15,8 @@ class TCPSocketServerInstance:
         self.open = False
 
         self.running = True
+        
+        self.buffer = 4096
 
     def main(self):
         self.server.on_connect(self)
@@ -29,13 +31,19 @@ class TCPSocketServerInstance:
         self.thd.start()
 
     def send(self, msg):
-        encode = msg.encode(self.server.charset)
+        if self.server.charset is not None:
+            encode = msg.encode(self.server.charset)
+        else:
+            encode = msg
         self.cr.send(encode)
 
     def recv_loop(self):
-        recv = self.cr.recv(4096)
+        recv = self.cr.recv(self.buffer)
         if recv != b'':
-            decode = recv.decode(self.server.charset)
+            if self.server.charset is not None:
+                decode = recv.decode(self.server.charset)
+            else:
+                decode = recv
             self.server.cal_on_message(self, decode)
             if hasattr(self, 'message'):
                 self.message(decode)
@@ -43,8 +51,11 @@ class TCPSocketServerInstance:
             self.running = False
 
     def recv(self):
-        recv = self.cr.recv(4096)
-        decode = recv.decode(self.server.charset)
+        recv = self.cr.recv(self.buffer)
+        if self.server.charset is not None:
+            decode = recv.decode(self.server.charset)
+        else:
+            decode = recv
         return decode
 
     def close(self):
